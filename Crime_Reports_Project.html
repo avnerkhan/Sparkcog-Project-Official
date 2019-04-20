@@ -13175,7 +13175,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">elapsed_time</span><span class="p">(</span><span class="n">oc_date</span><span class="p">,</span> <span class="n">oc_time</span><span class="p">,</span> <span class="n">rep_date</span><span class="p">,</span> <span class="n">rep_time</span><span class="p">):</span>
@@ -13215,8 +13215,9 @@ div#notebook {
 <span class="c1">#Load data</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Crime_Reports_Fixed_Labels.csv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Original Length:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Original Features:&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
 <span class="c1">#Drop Unused Columns</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;Category Description&#39;</span><span class="p">,</span> <span class="s1">&#39;UCR Category&#39;</span><span class="p">,</span> <span class="s1">&#39;PRA&#39;</span><span class="p">,</span> <span class="s1">&#39;APD Sector&#39;</span><span class="p">,</span> <span class="s1">&#39;APD District&#39;</span><span class="p">,</span> <span class="s1">&#39;Council District&#39;</span><span class="p">,</span> <span class="s1">&#39;Zip Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">,</span> <span class="s1">&#39;Incident Number&#39;</span><span class="p">,</span> <span class="s1">&#39;Highest Offense Description&#39;</span><span class="p">,</span> <span class="s1">&#39;Occurred Date Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Report Date Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Clearance Date&#39;</span><span class="p">,</span> <span class="s1">&#39;X-coordinate&#39;</span><span class="p">,</span> <span class="s1">&#39;Y-coordinate&#39;</span><span class="p">,</span> <span class="s1">&#39;Latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Longitude&#39;</span><span class="p">])</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">,</span> <span class="s1">&#39;Category Description&#39;</span><span class="p">,</span> <span class="s1">&#39;UCR Category&#39;</span><span class="p">,</span> <span class="s1">&#39;PRA&#39;</span><span class="p">,</span> <span class="s1">&#39;APD Sector&#39;</span><span class="p">,</span> <span class="s1">&#39;APD District&#39;</span><span class="p">,</span> <span class="s1">&#39;Council District&#39;</span><span class="p">,</span> <span class="s1">&#39;Zip Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Address&#39;</span><span class="p">,</span> <span class="s1">&#39;Incident Number&#39;</span><span class="p">,</span> <span class="s1">&#39;Highest Offense Description&#39;</span><span class="p">,</span> <span class="s1">&#39;Occurred Date Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Report Date Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Clearance Date&#39;</span><span class="p">,</span> <span class="s1">&#39;X-coordinate&#39;</span><span class="p">,</span> <span class="s1">&#39;Y-coordinate&#39;</span><span class="p">,</span> <span class="s1">&#39;Latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;Single Member Council Districts&#39;</span><span class="p">,</span> <span class="s1">&#39;BOUNDARIES_single_member_districts&#39;</span><span class="p">,</span> <span class="s1">&#39;Zoning Review Cases_data&#39;</span><span class="p">])</span>
 <span class="c1">#Drop rows with missing data</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 <span class="c1">#Create Elapsed Time Field and add it to our data</span>
@@ -13226,10 +13227,85 @@ div#notebook {
 <span class="n">elapsed_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">elapsed</span><span class="p">)</span>
 <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Elapsed Time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">elapsed_df</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Occurred Date&#39;</span><span class="p">,</span> <span class="s1">&#39;Occurred Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Report Date&#39;</span><span class="p">,</span> <span class="s1">&#39;Report Time&#39;</span><span class="p">])</span>
+<span class="c1">#Drop rows with missing data</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 <span class="c1">#Print Cleaned Data and save it as csv</span>
+<span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cleaned Length:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Remaining Features:&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-<span class="n">dataset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crime_Reports_Clean.csv&quot;</span><span class="p">)</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crime_Reports_Clean.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>C:\Users\kiran\Anaconda3\lib\site-packages\IPython\core\interactiveshell.py:3020: DtypeWarning: Columns (16) have mixed types. Specify dtype option on import or set low_memory=False.
+  interactivity=interactivity, compiler=compiler, result=result)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Original Length: 2124418
+Original Features: [&#39;Incident Number&#39;, &#39;Highest Offense Description&#39;, &#39;Highest Offense Code&#39;, &#39;Family Violence&#39;, &#39;Occurred Date Time&#39;, &#39;Occurred Date&#39;, &#39;Occurred Time&#39;, &#39;Report Date Time&#39;, &#39;Report Date&#39;, &#39;Report Time&#39;, &#39;Location Type&#39;, &#39;Address&#39;, &#39;Zip Code&#39;, &#39;Council District&#39;, &#39;APD Sector&#39;, &#39;APD District&#39;, &#39;PRA&#39;, &#39;Census Tract&#39;, &#39;Clearance Status&#39;, &#39;Clearance Date&#39;, &#39;UCR Category&#39;, &#39;Category Description&#39;, &#39;X-coordinate&#39;, &#39;Y-coordinate&#39;, &#39;Latitude&#39;, &#39;Longitude&#39;, &#39;Location&#39;, &#39;Zip Codes&#39;, &#39;Single Member Council Districts&#39;, &#39;BOUNDARIES_single_member_districts&#39;, &#39;Zoning Review Cases_data&#39;]
+
+Cleaned Length: 1208611
+Remaining Features: [&#39;Highest Offense Code&#39;, &#39;Family Violence&#39;, &#39;Location Type&#39;, &#39;Census Tract&#39;, &#39;Clearance Status&#39;, &#39;Zip Codes&#39;, &#39;Elapsed Time&#39;]
+    Highest Offense Code Family Violence                 Location Type  \
+2                   2716               N                   RESTAURANTS   
+3                   2716               N   DEPARTMENT / DISCOUNT STORE   
+19                  1818               N  STREETS / HWY / ROAD / ALLEY   
+40                  1803               N  STREETS / HWY / ROAD / ALLEY   
+44                  3295               N  STREETS / HWY / ROAD / ALLEY   
+
+    Census Tract Clearance Status  Zip Codes  Elapsed Time  
+2          24.22                C     3259.0           0.0  
+3          18.13                C     3642.0           1.0  
+19         11.00                C     2856.0           0.0  
+40         13.08                C     2859.0           0.0  
+44         11.00                C     2856.0           0.0  
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Split and Save Train and Test Data</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Crime_Reports_Clean.csv&quot;</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="o">*.</span><span class="mi">8</span><span class="p">)]</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="o">*.</span><span class="mi">8</span><span class="p">):]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Train Data:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">train_data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test Data:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">train_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crime_Reports_Train.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">test_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crime_Reports_Test.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13246,28 +13322,42 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Original Length  2124418
-Cleaned Length  779225
-    Highest Offense Code Family Violence                 Location Type  \
-3                   2716               N   DEPARTMENT / DISCOUNT STORE   
-47                  2716               N              RESIDENCE / HOME   
-65                   402               N               OTHER / UNKNOWN   
-68                   402               N  STREETS / HWY / ROAD / ALLEY   
-88                  1800               N  STREETS / HWY / ROAD / ALLEY   
+<pre>Train Data: 966888
+        Highest Offense Code Family Violence                 Location Type  \
+546974                  4100               N              RESIDENCE / HOME   
+213318                   600               N   DEPARTMENT / DISCOUNT STORE   
+568073                   600               N              RESIDENCE / HOME   
+777625                  1800               N  STREETS / HWY / ROAD / ALLEY   
+973614                  1400               N         PARKING LOTS / GARAGE   
 
-    Census Tract Clearance Status  Zip Codes  Single Member Council Districts  \
-3          18.13                C     3642.0                              4.0   
-47         24.09                C     3259.0                              2.0   
-65         24.09                N     3259.0                              2.0   
-68         18.12                C     3641.0                              4.0   
-88          9.02                C     2857.0                              3.0   
+        Census Tract Clearance Status  Zip Codes  Elapsed Time  
+546974         18.05                N     3646.0    132.683333  
+213318         17.50                N     3638.0      0.033333  
+568073         17.45                N     3243.0      0.000000  
+777625         21.05                C     3239.0      0.000000  
+973614          2.05                N     3644.0      0.000000  
 
-    BOUNDARIES_single_member_districts  Zoning Review Cases_data  Elapsed Time  
-3                                  9.0                    2233.0      0.000000  
-47                                 4.0                    3447.0      0.000000  
-65                                 4.0                    3447.0      0.966667  
-68                                 9.0                    3629.0      0.000000  
-88                                 3.0                    1371.0      0.000000  
+Test Data: 241723
+         Highest Offense Code Family Violence  \
+87811                    2704               Y   
+376892                    610               N   
+1192002                  3296               N   
+11097                     900               Y   
+695578                    900               Y   
+
+                              Location Type  Census Tract Clearance Status  \
+87811                      RESIDENCE / HOME         17.50                N   
+376892                PARKING LOTS / GARAGE          8.03                N   
+1192002        STREETS / HWY / ROAD / ALLEY         24.19                C   
+11097    DRUG STORE / DR. OFFICE / HOSPITAL          2.03                N   
+695578                     RESIDENCE / HOME         23.14                C   
+
+         Zip Codes  Elapsed Time  
+87811       3259.0      2.733333  
+376892      2857.0      0.133333  
+1192002     3258.0      0.000000  
+11097       2860.0      1.033333  
+695578      3256.0    792.750000  
 </pre>
 </div>
 </div>
@@ -13279,105 +13369,6 @@ Cleaned Length  779225
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Split and Save Train and Test Data</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Crime_Reports_Clean.csv&quot;</span><span class="p">)</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">train_data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="o">*.</span><span class="mi">8</span><span class="p">)]</span>
-<span class="n">test_data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="o">*.</span><span class="mi">8</span><span class="p">):]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Train Data:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">train_data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test Data:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">test_data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-<span class="n">train_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crime_Reports_Train.csv&quot;</span><span class="p">)</span>
-<span class="n">test_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;Crime_Reports_Test.csv&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Train Data: 623380
-        Highest Offense Code Family Violence          Location Type  \
-707051                  3401               N       RESIDENCE / HOME   
-113568                  3400               N       RESIDENCE / HOME   
-716463                   902               Y       RESIDENCE / HOME   
-464277                   600               N       RESIDENCE / HOME   
-37516                    600               N  GROCERY / SUPERMARKET   
-
-        Census Tract Clearance Status  Zip Codes  \
-707051         18.20                N     3646.0   
-113568         13.08                N     2859.0   
-716463          3.07                N     2865.0   
-464277         18.11                N     3641.0   
-37516          23.04                C     3256.0   
-
-        Single Member Council Districts  BOUNDARIES_single_member_districts  \
-707051                              4.0                                 9.0   
-113568                              3.0                                 3.0   
-716463                              9.0                                10.0   
-464277                              1.0                                 8.0   
-37516                               3.0                                 3.0   
-
-        Zoning Review Cases_data  Elapsed Time  
-707051                    3851.0           NaN  
-113568                     575.0           0.0  
-716463                    1169.0           NaN  
-464277                     350.0           NaN  
-37516                      102.0           0.0  
-
-Test Data: 155845
-        Highest Offense Code Family Violence          Location Type  \
-266299                   600               N       RESIDENCE / HOME   
-381581                   500               N       RESIDENCE / HOME   
-186828                  1108               N        OTHER / UNKNOWN   
-30271                   4100               N       RESIDENCE / HOME   
-307425                   601               N  PARKING LOTS / GARAGE   
-
-        Census Tract Clearance Status  Zip Codes  \
-266299          8.02                N     2857.0   
-381581         17.12                N     3259.0   
-186828         18.06                N     3642.0   
-30271          18.11                N     3641.0   
-307425         17.53                N     3647.0   
-
-        Single Member Council Districts  BOUNDARIES_single_member_districts  \
-266299                              1.0                                 8.0   
-381581                              5.0                                 1.0   
-186828                              4.0                                 9.0   
-30271                               1.0                                 8.0   
-307425                              7.0                                 7.0   
-
-        Zoning Review Cases_data  Elapsed Time  
-266299                     566.0      0.000000  
-381581                    3819.0           NaN  
-186828                    3439.0      1.116667  
-30271                      350.0      0.050000  
-307425                    3253.0      0.000000  
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Upload Train Data</span>
@@ -13410,16 +13401,15 @@ Test Data: 155845
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>False 404: NOT FOUND - {&#34;message&#34;: &#34;Dataset name not found&#34;}
-
-{&#39;status&#39;: &#39;Requested&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:56:30.950908&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;64d3b6c2b2764cf5be6b50a32633b45f&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: None}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:56:30.950908&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;64d3b6c2b2764cf5be6b50a32633b45f&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:56:30.950908&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;64d3b6c2b2764cf5be6b50a32633b45f&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:56:30.950908&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;64d3b6c2b2764cf5be6b50a32633b45f&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:56:30.950908&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;64d3b6c2b2764cf5be6b50a32633b45f&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:56:30.950908&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;64d3b6c2b2764cf5be6b50a32633b45f&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:56:30.950908&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;64d3b6c2b2764cf5be6b50a32633b45f&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Complete&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:56:30.950908&#39;, &#39;endtime&#39;: &#39;2019-04-20T11:58:04.37247&#39;, &#39;percent_complete&#39;: 100, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;64d3b6c2b2764cf5be6b50a32633b45f&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
+<pre>True None
+{&#39;status&#39;: &#39;Requested&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:26:05.315836&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;22a0bc6cf84345f6a8c503a2f3506993&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: None}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:26:05.315836&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;22a0bc6cf84345f6a8c503a2f3506993&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:26:05.315836&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;22a0bc6cf84345f6a8c503a2f3506993&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:26:05.315836&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;22a0bc6cf84345f6a8c503a2f3506993&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:26:05.315836&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;22a0bc6cf84345f6a8c503a2f3506993&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:26:05.315836&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;22a0bc6cf84345f6a8c503a2f3506993&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:26:05.315836&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;22a0bc6cf84345f6a8c503a2f3506993&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Complete&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:26:05.315836&#39;, &#39;endtime&#39;: &#39;2019-04-20T14:27:40.54501&#39;, &#39;percent_complete&#39;: 100, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: [&#39;22a0bc6cf84345f6a8c503a2f3506993&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
 </pre>
 </div>
 </div>
@@ -13430,7 +13420,7 @@ Test Data: 155845
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Creating Model</span>
@@ -13463,47 +13453,47 @@ Test Data: 155845
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>False 400: BAD REQUEST - {&#34;message&#34;: &#34;Model does not exist&#34;}
 
-{&#39;status&#39;: &#39;Requested&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: None}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.46628835797309875, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 7, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.43185436725616455, &#39;generations&#39;: 1, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T11:59:56.880633&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 15, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4287685751914978, &#39;generations&#39;: 2, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Requested&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: None}
+{&#39;status&#39;: &#39;Requested&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: None}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: None, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T14:28:26.710665&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 2, &#39;job_type&#39;: &#39;TrainModel&#39;, &#39;loss&#39;: 0.4462642967700958, &#39;generations&#39;: 0, &#39;dataset_names&#39;: [&#39;Crime_Reports_Train.csv&#39;], &#39;artifact_names&#39;: None, &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
 </pre>
 </div>
 </div>
@@ -13514,7 +13504,7 @@ Test Data: 155845
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Analyzing Models</span>
@@ -13541,10 +13531,11 @@ Test Data: 155845
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T13:08:24.756755&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;AnalyzeModel&#39;, &#39;loss&#39;: 0.42816871404647827, &#39;generations&#39;: 6, &#39;dataset_names&#39;: None, &#39;artifact_names&#39;: [&#39;2d2f3b820e954002bc2c25820656dbf1&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T13:08:24.756755&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;AnalyzeModel&#39;, &#39;loss&#39;: 0.42816871404647827, &#39;generations&#39;: 6, &#39;dataset_names&#39;: None, &#39;artifact_names&#39;: [&#39;2d2f3b820e954002bc2c25820656dbf1&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T13:08:24.756755&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;AnalyzeModel&#39;, &#39;loss&#39;: 0.42816871404647827, &#39;generations&#39;: 6, &#39;dataset_names&#39;: None, &#39;artifact_names&#39;: [&#39;2d2f3b820e954002bc2c25820656dbf1&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Complete&#39;, &#39;starttime&#39;: &#39;2019-04-20T13:08:24.756755&#39;, &#39;endtime&#39;: &#39;2019-04-20T13:09:10.270482&#39;, &#39;percent_complete&#39;: 100, &#39;job_type&#39;: &#39;AnalyzeModel&#39;, &#39;loss&#39;: 0.42816871404647827, &#39;generations&#39;: 6, &#39;dataset_names&#39;: None, &#39;artifact_names&#39;: [&#39;2d2f3b820e954002bc2c25820656dbf1&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
+<pre>{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T15:35:46.949398&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;AnalyzeModel&#39;, &#39;loss&#39;: 0.4200733006000519, &#39;generations&#39;: 6, &#39;dataset_names&#39;: None, &#39;artifact_names&#39;: [&#39;84bc65621352428c93f741dea381a2a9&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T15:35:46.949398&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;AnalyzeModel&#39;, &#39;loss&#39;: 0.4200733006000519, &#39;generations&#39;: 6, &#39;dataset_names&#39;: None, &#39;artifact_names&#39;: [&#39;84bc65621352428c93f741dea381a2a9&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T15:35:46.949398&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;AnalyzeModel&#39;, &#39;loss&#39;: 0.4200733006000519, &#39;generations&#39;: 6, &#39;dataset_names&#39;: None, &#39;artifact_names&#39;: [&#39;84bc65621352428c93f741dea381a2a9&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T15:35:46.949398&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;AnalyzeModel&#39;, &#39;loss&#39;: 0.4200733006000519, &#39;generations&#39;: 6, &#39;dataset_names&#39;: None, &#39;artifact_names&#39;: [&#39;84bc65621352428c93f741dea381a2a9&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Complete&#39;, &#39;starttime&#39;: &#39;2019-04-20T15:35:46.949398&#39;, &#39;endtime&#39;: &#39;2019-04-20T15:36:42.608651&#39;, &#39;percent_complete&#39;: 100, &#39;job_type&#39;: &#39;AnalyzeModel&#39;, &#39;loss&#39;: 0.4200733006000519, &#39;generations&#39;: 6, &#39;dataset_names&#39;: None, &#39;artifact_names&#39;: [&#39;84bc65621352428c93f741dea381a2a9&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
 </pre>
 </div>
 </div>
@@ -13555,7 +13546,7 @@ Test Data: 155845
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">feature_importance</span><span class="p">)</span>
@@ -13575,68 +13566,56 @@ Test Data: 155845
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Highest Offense Code                                        4.006581e-01
-Unnamed: 0                                                  1.341023e-01
-Location Type = STREETS / HWY / ROAD / ALLEY                1.168162e-01
-Location Type = RESIDENCE / HOME                            8.675619e-02
-Family Violence = Y                                         7.704243e-02
-Elapsed Time                                                2.677604e-02
-Census Tract                                                2.543925e-02
-Zoning Review Cases_data                                    2.543462e-02
-Location Type = DEPARTMENT / DISCOUNT STORE                 1.927089e-02
-Location Type = GROCERY / SUPERMARKET                       1.752925e-02
-Zip Codes                                                   1.524369e-02
-Location Type = COMMERCIAL / OFFICE BUILDING                7.941634e-03
-Location Type = PARKING LOTS / GARAGE                       7.873082e-03
-Location Type = OTHER / UNKNOWN                             4.167408e-03
-Location Type = GOVERNMENT / PUBLIC BUILDING                3.572580e-03
-Location Type = RESTAURANTS                                 1.963862e-03
-Location Type = HOTEL / MOTEL / ETC.                        1.955931e-03
-Location Type = CONVENIENCE STORE                           1.887412e-03
-BOUNDARIES_single_member_districts = 3.0                    1.884462e-03
-Single Member Council Districts = 4.0                       1.371503e-03
-BOUNDARIES_single_member_districts = 9.0                    1.222045e-03
-Location Type = SPECIALTY  STORE (TV  FUR ETC.)             1.216530e-03
-Location Type = DRUG STORE / DR. OFFICE / HOSPITAL          1.187695e-03
-Single Member Council Districts = 3.0                       1.171187e-03
-Location Type = GAS / SERVICE STATIONS                      1.168552e-03
-BOUNDARIES_single_member_districts = 10.0                   1.018904e-03
-Location Type = SCHOOLS / COLLEGES                          9.980988e-04
-BOUNDARIES_single_member_districts = 2.0                    9.833531e-04
-BOUNDARIES_single_member_districts = 6.0                    9.756168e-04
-Location Type = BAR / NIGHT CLUB                            9.613424e-04
-                                                                ...     
-Location Type = BANKS / SAVINGS &amp; LOAN                      5.746407e-04
-BOUNDARIES_single_member_districts = 4.0                    5.284205e-04
-Single Member Council Districts = 8.0                       4.997597e-04
-Single Member Council Districts = 2.0                       4.335406e-04
-Location Type = CONSTRUCTION SITE                           3.545890e-04
-Location Type = CHURCH / SYNAGOGUE / TEMPLE / MOSQUE        3.270279e-04
-Single Member Council Districts = 10.0                      3.106684e-04
-BOUNDARIES_single_member_districts = 5.0                    3.063205e-04
-Location Type = RENTAL STORAGE FACILITY                     1.995365e-04
-Location Type = JAIL / PRISON                               1.691026e-04
-Location Type = SHOPPING MALL                               1.652872e-04
-Location Type = SCHOOL - COLLEGE / UNIVERSITY               1.532065e-04
-Location Type = SCHOOL - ELEMENTARY / SECONDARY             1.474847e-04
-Location Type = LIQUOR STORE                                1.313953e-04
-Location Type = SHELTER-MISSION / HOMELESS                  1.114414e-04
-Location Type = LAKE / WATERWAY                             1.027255e-04
-Location Type = AUTO DEALERSHIP NEW / USED                  8.147963e-05
-Location Type = DAYCARE FACILITY                            4.817965e-05
-Location Type = GAMBLING FACILITY / CASINO / RACE TRACK     4.548892e-05
-Location Type = COMMUNITY CENTER                            4.338377e-05
-Location Type = CAMP / CAMPGROUND                           2.025500e-05
-Location Type = INDUSTRIAL SITE                             1.666507e-05
-Location Type = REST AREA                                   9.692096e-06
-Location Type = ATM SEPARATE FROM BANK                      6.457870e-06
-Location Type = ARENA / STADIUM / FAIRGROUNDS / COLISEUM    6.083218e-06
-Location Type = AMUSEMENT PARK                              5.566200e-06
-Location Type = DOCK / WHARF / FREIGHT / MODAL TERMINAL     2.525087e-06
-Location Type = TRIBAL LANDS                                2.350754e-06
-Location Type = MILITARY INSTALLATION                       9.738708e-07
-Location Type = FARM FACILITY                               3.912023e-11
-Length: 69, dtype: float64
+<pre>Highest Offense Code                                              5.056567e-01
+Location Type = STREETS / HWY / ROAD / ALLEY                      1.364064e-01
+Family Violence = Y                                               7.891835e-02
+Location Type = RESIDENCE / HOME                                  7.385196e-02
+Elapsed Time                                                      4.650376e-02
+Census Tract                                                      4.618879e-02
+Zip Codes                                                         3.082168e-02
+Location Type = DEPARTMENT / DISCOUNT STORE                       2.325520e-02
+Location Type = GROCERY / SUPERMARKET                             1.636362e-02
+Location Type = PARKING LOTS / GARAGE                             8.583110e-03
+Location Type = COMMERCIAL / OFFICE BUILDING                      7.936218e-03
+Location Type = OTHER / UNKNOWN                                   5.269813e-03
+Location Type = GOVERNMENT / PUBLIC BUILDING                      4.728369e-03
+Location Type = HOTEL / MOTEL / ETC.                              2.291820e-03
+Location Type = CONVENIENCE STORE                                 1.661150e-03
+Location Type = RESTAURANTS                                       1.559101e-03
+Location Type = PARK / PLAYGROUND                                 1.470818e-03
+Location Type = DRUG STORE / DR. OFFICE / HOSPITAL                1.223008e-03
+Location Type = TRANSPORTATION (AIR / BUS / TRAIN - TERMINALS)    1.128899e-03
+Location Type = BAR / NIGHT CLUB                                  8.463480e-04
+Location Type = SPECIALTY  STORE (TV  FUR ETC.)                   7.922013e-04
+Location Type = GAS / SERVICE STATIONS                            7.459223e-04
+Location Type = BANKS / SAVINGS &amp; LOAN                            5.312156e-04
+Location Type = SCHOOLS / COLLEGES                                4.879300e-04
+Location Type = LAKE / WATERWAY                                   3.643914e-04
+Location Type = FIELD / WOODS                                     3.620172e-04
+Location Type = SHOPPING MALL                                     3.448090e-04
+Location Type = CONSTRUCTION SITE                                 2.902283e-04
+Location Type = SHELTER-MISSION / HOMELESS                        2.496875e-04
+Location Type = JAIL / PRISON                                     1.725759e-04
+Location Type = CHURCH / SYNAGOGUE / TEMPLE / MOSQUE              1.628815e-04
+Location Type = SCHOOL - COLLEGE / UNIVERSITY                     1.582776e-04
+Location Type = LIQUOR STORE                                      1.321889e-04
+Location Type = SCHOOL - ELEMENTARY / SECONDARY                   1.308706e-04
+Location Type = RENTAL STORAGE FACILITY                           9.541643e-05
+Location Type = DAYCARE FACILITY                                  8.655547e-05
+Location Type = AUTO DEALERSHIP NEW / USED                        5.985154e-05
+Location Type = COMMUNITY CENTER                                  4.916632e-05
+Location Type = GAMBLING FACILITY / CASINO / RACE TRACK           3.529371e-05
+Location Type = CAMP / CAMPGROUND                                 2.530679e-05
+Location Type = ARENA / STADIUM / FAIRGROUNDS / COLISEUM          1.449777e-05
+Location Type = INDUSTRIAL SITE                                   1.192249e-05
+Location Type = ATM SEPARATE FROM BANK                            9.414990e-06
+Location Type = REST AREA                                         7.309178e-06
+Location Type = DOCK / WHARF / FREIGHT / MODAL TERMINAL           5.661531e-06
+Location Type = AMUSEMENT PARK                                    5.093275e-06
+Location Type = TRIBAL LANDS                                      2.384011e-06
+Location Type = MILITARY INSTALLATION                             1.724622e-06
+Location Type = FARM FACILITY                                     8.357156e-08
+dtype: float64
 </pre>
 </div>
 </div>
@@ -13647,7 +13626,7 @@ Length: 69, dtype: float64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Upload Test Data</span>
@@ -13679,11 +13658,10 @@ Length: 69, dtype: float64
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>False 404: NOT FOUND - {&#34;message&#34;: &#34;Dataset name not found&#34;}
-
-{&#39;status&#39;: &#39;Requested&#39;, &#39;starttime&#39;: &#39;2019-04-20T13:10:39.958568&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Test.csv&#39;], &#39;artifact_names&#39;: [&#39;179628b8f9614bb2911d4db154bf8bd5&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: None}
-{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T13:10:39.958568&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Test.csv&#39;], &#39;artifact_names&#39;: [&#39;179628b8f9614bb2911d4db154bf8bd5&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Complete&#39;, &#39;starttime&#39;: &#39;2019-04-20T13:10:39.958568&#39;, &#39;endtime&#39;: &#39;2019-04-20T13:11:03.145297&#39;, &#39;percent_complete&#39;: 100, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Test.csv&#39;], &#39;artifact_names&#39;: [&#39;179628b8f9614bb2911d4db154bf8bd5&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
+<pre>True None
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T15:37:19.740881&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Test.csv&#39;], &#39;artifact_names&#39;: [&#39;8e1042e7001b43efb54c3215b5089139&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T15:37:19.740881&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Test.csv&#39;], &#39;artifact_names&#39;: [&#39;8e1042e7001b43efb54c3215b5089139&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Complete&#39;, &#39;starttime&#39;: &#39;2019-04-20T15:37:19.740881&#39;, &#39;endtime&#39;: &#39;2019-04-20T15:37:43.740483&#39;, &#39;percent_complete&#39;: 100, &#39;job_type&#39;: &#39;CleanDataTiny&#39;, &#39;loss&#39;: None, &#39;generations&#39;: None, &#39;dataset_names&#39;: [&#39;Crime_Reports_Test.csv&#39;], &#39;artifact_names&#39;: [&#39;8e1042e7001b43efb54c3215b5089139&#39;], &#39;model_name&#39;: None, &#39;job_error&#39;: &#39;&#39;}
 </pre>
 </div>
 </div>
@@ -13694,7 +13672,7 @@ Length: 69, dtype: float64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Run Model on Test Data</span>
@@ -13732,16 +13710,16 @@ Length: 69, dtype: float64
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T13:13:18.206631&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;RunModel&#39;, &#39;loss&#39;: 0.42816871404647827, &#39;generations&#39;: 6, &#39;dataset_names&#39;: [&#39;Crime_Reports_Test.csv&#39;], &#39;artifact_names&#39;: [&#39;ab042fe7aabd41c8973ecba33e3c2acc&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
-{&#39;status&#39;: &#39;Complete&#39;, &#39;starttime&#39;: &#39;2019-04-20T13:13:18.206631&#39;, &#39;endtime&#39;: &#39;2019-04-20T13:13:25.532064&#39;, &#39;percent_complete&#39;: 100, &#39;job_type&#39;: &#39;RunModel&#39;, &#39;loss&#39;: 0.42816871404647827, &#39;generations&#39;: 6, &#39;dataset_names&#39;: [&#39;Crime_Reports_Test.csv&#39;], &#39;artifact_names&#39;: [&#39;ab042fe7aabd41c8973ecba33e3c2acc&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420114554&#39;, &#39;job_error&#39;: &#39;&#39;}
+<pre>{&#39;status&#39;: &#39;Running&#39;, &#39;starttime&#39;: &#39;2019-04-20T15:39:02.417205&#39;, &#39;endtime&#39;: None, &#39;percent_complete&#39;: 0, &#39;job_type&#39;: &#39;RunModel&#39;, &#39;loss&#39;: 0.4200733006000519, &#39;generations&#39;: 6, &#39;dataset_names&#39;: [&#39;Crime_Reports_Test.csv&#39;], &#39;artifact_names&#39;: [&#39;ce0a5d2e34de4dfca271bed78a24e937&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
+{&#39;status&#39;: &#39;Complete&#39;, &#39;starttime&#39;: &#39;2019-04-20T15:39:02.417205&#39;, &#39;endtime&#39;: &#39;2019-04-20T15:39:12.716231&#39;, &#39;percent_complete&#39;: 100, &#39;job_type&#39;: &#39;RunModel&#39;, &#39;loss&#39;: 0.4200733006000519, &#39;generations&#39;: 6, &#39;dataset_names&#39;: [&#39;Crime_Reports_Test.csv&#39;], &#39;artifact_names&#39;: [&#39;ce0a5d2e34de4dfca271bed78a24e937&#39;], &#39;model_name&#39;: &#39;Clearance Status_model20190420142147&#39;, &#39;job_error&#39;: &#39;&#39;}
               precision    recall  f1-score   support
 
-           C       0.87      0.83      0.85     54553
-           N       0.91      0.94      0.92    101292
+           C       0.86      0.81      0.84     73644
+           N       0.92      0.94      0.93    168079
 
-   micro avg       0.90      0.90      0.90    155845
-   macro avg       0.89      0.88      0.89    155845
-weighted avg       0.90      0.90      0.90    155845
+   micro avg       0.90      0.90      0.90    241723
+   macro avg       0.89      0.88      0.89    241723
+weighted avg       0.90      0.90      0.90    241723
 
 </pre>
 </div>
@@ -13755,7 +13733,7 @@ weighted avg       0.90      0.90      0.90    155845
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXkAAAD8CAYAAACSCdTiAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADl0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uIDMuMC4yLCBodHRwOi8vbWF0cGxvdGxpYi5vcmcvOIA7rQAAEQtJREFUeJzt3Xl0VeW5x/HfIwFCUJlVFCXgiMtqDFEBAScGxXvjjGC94LDk1up1uLciyPLCbV04oa0jiNVSaxeDVQFrEbQ4rKUVDQqKYiSUIDQWAggyBIXkvX9kkwZIQoYz5cn3s1ZW9nnPPu9+n7M3P07evc85FkIQAMCng5I9AABA/BDyAOAYIQ8AjhHyAOAYIQ8AjhHyAOAYIQ8AjhHyAOAYIQ8AjqXFq+OOHTuGzMzMeHUPAC4tXrx4QwihU6z6i1vIZ2ZmKi8vL17dA4BLZrY6lv0xXQMAjhHyAOAYIQ8AjhHyAOAYIQ8Ajh0w5M0smNkjlW7/wswmxHVUAICYqM0r+R8kXW5mHeM9GABAbNXmOvndkqZKulPSuPgOR1r5YF8dW/J5vDcDAHGz6571at6iZbKHIan2c/JPSfqpmbWpaSUzG2VmeWaWV1xcXK8BEfAAGrvS0t3JHkKFWoV8COF7SS9Iuu0A600NIeSEEHI6dYrZu3IBAPVUl6trfiPpRkmt4zQWAECM1TrkQwibJM1SedADABqBul4n/4gkrrIBgEbigFfXhBAOrrS8TlJGXEcEAIgZ3vEKAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI4R8gDgGCEPAI6lJXsAABqPXS3aam323drZprskS/ZwUlZYVSizml9Dp6enq0uXLmrevHlcx0LIA6i1tdl365DuOcpsnSYzQr46ZUecpIMOalbt/SEEbdy4UWvXrlW3bt3iOhamawDU2s423dWBgG8wM1OHDh20c+fOuG+LkAdQB0bAx0iinkdCHkCj8+q8hbKjsvVVwaoa15s2c66K/llc7+2880Ge/m3EbfV+fCog5AE0OtNnz1ffM7M0Y878Gteb9tJrKlpX/5D3gJAH0Khs275D7+ct0XOTxmvGnAUV7Q89PU0/uWCoThtwtcZMfFx/+vNbylv6pX566zhlDRymkpKdyjzrYm3Y9J0kKW/plzr3ypskSR99ukx9cq/T6YOGq0/udcovKExGaXHB1TUA6uX/3tuiL4t3xbTPkzs11/j+bWpcZ/Ybb+vCc/vohGO7qn3bQ/XJ58u1rniTZr/xjhb9+ffKaNVKm77bovbt2ujJaTM16d47lXPayTX2edJxmXrvld8qLS1Nb723SPc8+KRefnZSLEtLGkIeQKMyffZ83XHTNZKkYZcM1vTZb6isLOj6q3OV0aqVJKl9u5r/o9jXlu+3aeQd47Vi1TcyM+3atTvm404WQh5AvRzoFXc8bNy0WQs/+FjL8gtkZiotLZOZ6Yoh59fqapW0tGYqKwuSpJ0//FDRfu/Dk3Venxy9+twjKlxTVDGN4wFz8gAajT+9/pZGXHGxVn/0FxUuel1r8uap2zFHqn3bNnp+xhztKCmRJG36bosk6ZDWGdq6bXvF4zO7HKnFny2XJL38+l8r2rds3aajjjhMkjRt1txElZMQhDyARmP6nPm67KLz9mq7YsgFKlpXrNxB5yjnomuVNXCYJk15QZJ03dBc/WzMxIoTr+P/e5Ru/9+H1e+yG9Ss2b/ekTr65hEae/8TOvuS61VaWpbQmuLNQghx6TgnJyfk5eXV/YETEv8nIIDaWT54lnp0PSzZw0h5ZUecWuPHGuyxfPly9ejRY682M1scQsiJ1Vh4JQ8AjhHyAOAYIQ8AjhHyAOAYIQ8AjhHyAOAYIQ+gUWl2dI6yBg7TKedfpatGja54A1R9VP4o4bkL3tUDT/6u2nU3b9mqp6fNqvM2JkyYoEmTkvc5OIQ8gEalVXpLLXlzhpYtfEktWjTXlBde3uv+EILKyur+hqbcQedozK3XV3v/5u+36ukXXqpzv8lGyANotPqdeboKCteocE2RepxzuX4+9n5lD75Ga4r+qQXv/k29/32ksgdfo6tGjda27TskSW+8/b5O6n+5+l56g16Zt7Cir2kz5+rWcQ9IktYVb9RlN/6PThtwtU4bcLU++Hipxkx8XCtXr1XWwGG661e/liQ9PPn3OmPItTp1wFCNnzS5oq+JEyfqxBNP1IABA5Sfn5/AZ2R/fEAZgPr54AlpY0Fs++xwnNTnv2q16u7duzXv7fd14bl9JEn5K1frd49O0NP3j9WGTd/pvsd+q7dmTlHrjFZ68KlpenTqixp980jddNd9WjjrGR3X7Whd/bMxVfZ9270P6Zxe2Xr1uUdUWlqqbdt36IF7btOy/JVa8uYMSdKCd/+mFau+0Uev/0EhBOVed4fe+3CxWme00syZs/Tpp59q9+7dys7OVs+ePWPz/NQDIQ+gUSnZ+YOyBg6TJPU763TdOPxSFa0rVtcundWr56mSpA8Xf64vv16lsy8pn375cdcu9e55qr4qKFS3Y47U8d2PkSRde8UQTX3x5f22sfD9j/XCY7+SJDVr1kxtDj1E323Zutc6C979UAve/VCnDxouSdq2Y4dWrFqjrdu269JLL1FGRoYkKTc3Nw7PQu0R8gDqp5avuGNtz5z8vlpntKpYDiFoYP+zNP3p+/daZ8my/Jh9gXYIQWNvvV7/+R9X7tX+m2f/mFJfds6cPAB3evU8Ve9/vFQFq76RJO0oKdHXK1frpOMyteqbIq0sXCNJmj77jSoff0HfMzU5OslaWlqq77du2+9jiwef21vPz5xbMdf/j2/Xa/2GTerfK1uzZ89RSUmJtm7dqtdeey2epR4Qr+QBuNOpQztN+/UEDb/lHv3w44+SpPtG36ITju2qqQ+N08UjblfH9m3V98wsLftq//MKj/3yLo0afZ+emzFHzQ46SJPvH6veOafp7DOydMr5V+mi8/ro4Xvv1PIVq9Q79zpJ0sEZrfTiE/cp+yc9NHToVcrKylLXrl3Vr1+/RJa+Hz5qGECt8VHDtcNHDQMAEoKQBwDHCHkAcIyQB1AHQfE6j9fUJOp5JOQB1Fr6lr9r4/bdBH0DhRC0ceNGpaenx31bXEIJoNa6fPKg1upuFbfpLil13vCTasLmr2RW82vo9PR0denSJe5jIeQB1FrzHzer24djkz2MlLfz7iKlt2qd7GFIYroGAFwj5AHAMUIeABwj5AHAMUIeABwj5AHAMUIeABwj5AHAMUIeABwj5AHAMUIeABwj5AHAMUIeABwj5AHAMUIeABwj5AHAMUIeABwj5AHAMUIeABwj5AHAMUIeABwj5AHAMUIeABwj5AHAMUIeABwj5AHAMUIeAGIthGSPoAIhDwCOEfIA4BghDwCOEfIA4BghDwCOEfIA4BghDwCOEfIAEGOB6+QBAIlAyAOAY4Q8ADhGyAOAY4Q8ADhGyAOAY4Q8AMRYCGXJHkIFQh4AHCPkAcAxQh4AHCPkAcAxQh4AHCPkAcAxQh4AHCPkASDG+KhhAEBCEPIA4BghDwCOEfIA4BghDwCOEfIA4BghDwCOEfIAEGNcJw8ASAhCHgAcI+QBwDFCHgAcI+QBwDFCHgAcI+QBIMa4hBIAkBCEPAA4RsgDgGOEPAA4RsgDgGOEPAA4RsgDgGOEPADEGNfJAwASgpAHAMcIeQBwrFYhb2ZHmNkMM1tpZl+a2V/M7IR4Dw4A0DAHDHkzM0mvSnonhHBsCOFkSfdIOjzegwMANExaLdY5T9KuEMKUPQ0hhCXxGxIAIFZqM11ziqTF8R4IACD2Ynri1cxGmVmemeUVFxfXq49PDr8ilkMCgIQ7tG2HZA+hgh3oon0zu0DS+BBC/7p0nJOTE/Ly8hoyNgBocsxscQghJ1b91eaV/EJJLc3spkqDOMPMzonVIAAA8XHAkA/lL/UvkzQwuoTyC0kTJBXFeWwAgAaqzdU1CiEUSRoa57EAAGKMd7wCgGOEPAA4RsgDgGOEPAA4RsgDgGMHfDNUvTs2K5a0up4P7yhpQwyH05hQe9NE7U1TVbV3DSF0itUG4hbyDWFmebF8x1djQu3U3tRQe3xrZ7oGABwj5AHAsVQN+anJHkASUXvTRO1NU9xrT8k5eQBAbKTqK3kAQAykVMib2YVmlm9mBWY2JtnjaQgzKzSzz81siZnlRW3tzexNM1sR/W4XtZuZPR7V/ZmZZVfqZ2S0/gozG1mpvWfUf0H0WEt8lRVjed7M1pvZskptca+1um0kUjW1TzCzf0T7fomZDal039iojnwzG1ypvcpj38y6mdmiqMaZZtYiam8Z3S6I7s9MTMX/YmZHm9nbZrbczL4ws9ujdvf7vobaU2/fhxBS4kdSM0krJXWX1ELSUkknJ3tcDainUFLHfdoekjQmWh4j6cFoeYikeZJMUi9Ji6L29pL+Hv1uFy23i+77SFLv6DHzJF2UxFr7S8qWtCyRtVa3jRSofYKkX1Sx7snRcd1SUrfoeG9W07EvaZakYdHyFEk3R8s/lzQlWh4maWYSau8sKTtaPkTS11GN7vd9DbWn3L5PSihU86T1ljS/0u2xksYme1wNqKdQ+4d8vqTOlQ6S/Gj5GUnD911P0nBJz1RqfyZq6yzpq0rte62XpHoztXfQxb3W6raRArVX9w99r2Na0vzouK/y2I+CbYOktKi9Yr09j42W06L1LMnHwBxJA5vSvq+i9pTb96k0XXOUpDWVbq+N2hqrIGmBmS02s1FR2+EhhG8lKfp9WNReXe01ta+toj2VJKLW6raRCm6NpiSerzSVUNfaO0jaHELYvU/7Xn1F92+J1k+KaMrgdEmL1MT2/T61Sym271Mp5KuaU27Ml/6cHULIlnSRpFvMrKbvyK2u9rq2NwZNodbJko6VlCXpW0mPRO2xrD1lnhczO1jSy5LuCCF8X9OqVbQ16n1fRe0pt+9TKeTXSjq60u0uasRfMRjKv01LIYT1kl6VdKakdWbWWZKi3+uj1aurvab2LlW0p5JE1FrdNpIqhLAuhFAaQiiT9KzK971U99o3SGprZmn7tO/VV3R/G0mbYl9NzcysucpD7o8hhFei5iax76uqPRX3fSqF/MeSjo/OKLdQ+QmFuUkeU72YWWszO2TPsqRBkpapvJ49Vw6MVPk8nqL2EdHVB70kbYn+BJ0vaZCZtYv+7Buk8nm5byVtNbNe0dUGIyr1lSoSUWt120iqPeETuUzl+14qH++w6OqIbpKOV/mJxSqP/VA+6fq2pCujx+/7PO6p/UpJC6P1EybaH89JWh5CeLTSXe73fXW1p+S+T+bJiipOTgxR+VnqlZLGJXs8Daiju8rPki+V9MWeWlQ+b/ZXSSui3+2jdpP0VFT355JyKvV1g6SC6Of6Su050QG0UtKTSuJJN0nTVf6n6S6Vv8q4MRG1VreNFKj9D1Ftn0X/IDtXWn9cVEe+Kl0RVd2xHx1LH0XPyUuSWkbt6dHtguj+7kmova/Kpwk+k7Qk+hnSFPZ9DbWn3L7nHa8A4FgqTdcAAGKMkAcAxwh5AHCMkAcAxwh5AHCMkAcAxwh5AHCMkAcAx/4feC0eoQpjTz0AAAAASUVORK5CYII=
 "
 >
 </div>
@@ -13768,7 +13746,7 @@ weighted avg       0.90      0.90      0.90    155845
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">status</span><span class="p">,</span> <span class="n">model_type</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">lookup_model_name</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
@@ -13789,7 +13767,7 @@ weighted avg       0.90      0.90      0.90    155845
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>{&#39;type&#39;: &#39;XGBClassifier&#39;, &#39;parameters&#39;: {&#39;base_score&#39;: 0.5, &#39;colsample_bylevel&#39;: 1, &#39;colsample_bytree&#39;: 1, &#39;gamma&#39;: 0, &#39;learning_rate&#39;: 0.268008771835894, &#39;max_delta_step&#39;: 0, &#39;max_depth&#39;: 9, &#39;min_child_weight&#39;: 8, &#39;n_estimators&#39;: 141, &#39;n_jobs&#39;: -1, &#39;reg_alpha&#39;: 0, &#39;reg_lambda&#39;: 1, &#39;scale_pos_weight&#39;: 1, &#39;subsample&#39;: 0.9920498303538875}}
+<pre>{&#39;type&#39;: &#39;XGBClassifier&#39;, &#39;parameters&#39;: {&#39;base_score&#39;: 0.5, &#39;colsample_bylevel&#39;: 1, &#39;colsample_bytree&#39;: 1, &#39;gamma&#39;: 0, &#39;learning_rate&#39;: 0.7647392976140628, &#39;max_delta_step&#39;: 0, &#39;max_depth&#39;: 5, &#39;min_child_weight&#39;: 17, &#39;n_estimators&#39;: 452, &#39;n_jobs&#39;: -1, &#39;reg_alpha&#39;: 0, &#39;reg_lambda&#39;: 1, &#39;scale_pos_weight&#39;: 1, &#39;subsample&#39;: 0.43197509593085504}}
 </pre>
 </div>
 </div>
