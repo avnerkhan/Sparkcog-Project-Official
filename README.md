@@ -15,7 +15,7 @@ For this project our team decided to analyze the Austin Police Departments Crime
   - Run each cell in Crime_Reports_Project.ipynb in order
 
 # Included Files
-  - Crime_Reports.csv - Uncleaned Source Data from APD Repository
+  - Crime_Reports.csv - NOT INCLUDED BECAUSE OF SPACE, Download from above link
   - Crime_Reports_Project.ipynb - Jupyter Notebook where we performed data cleaning as well as used Darwin to construct model
   - Crime_Reports_Project.html - html version of the above notebook
   - csv_cleaner.py - at first used to downsample data for inital testing, also adjusts relevant labels as explained in paper
