@@ -13,3 +13,10 @@ For this project our team decided to analyze the Austin Police Departments Crime
     ```
   - Open Crime_Reports_Project.ipynb in Jupyter Notebook
   - Run each cell in Crime_Reports_Project.ipynb in order
+
+# Included Files
+  - Crime_Reports.csv - Uncleaned Source Data from APD Repository
+  - Crime_Reports_Project.ipynb - Jupyter Notebook where we performed data cleaning as well as used Darwin to construct model
+  - Crime_Reports_Project.html - html version of the above notebook
+  - csv_cleaner.py - at first used to downsample data for inital testing, also adjusts relevant labels as explained in paper
+  - amb_sdk/ - Darwin SDK
