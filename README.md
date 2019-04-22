@@ -6,7 +6,7 @@ For this project our team decided to analyze the Austin Police Departments Crime
 
 # Instructions to Run Code
   - Download Code
-  - Download Crime_Reports.csv from here: https://data.austintexas.gov/Public-Safety/Crime-Reports/fdj4-gpfu
+  - Download Crime_Reports.csv from here: https://data.austintexas.gov/Public-Safety/Crime-Reports/fdj4-gpfu (Click Export, and then CSV)
   - ```sh
     #run csv_cleaner.py, make sure all files including csvs are in the same directory
     $ python csv_cleaner.py
